@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views import View
 from .forms import ProductForm
+from .models import Product
 
 
 # # Create your views here.
@@ -19,3 +20,21 @@ class ProductRecordFormView(FormView):
 class FormSuccessView(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse ("Product record saved successfully")
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'vendor']
+    template_name = "product_form.html"
+    success_url = '/entry_success'
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['name', 'vendor']
+    template_name = "product_form.html"
+    success_url = '/entry_success'
+
+
+
+
