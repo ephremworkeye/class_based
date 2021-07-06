@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Product List</title>
+    </head>
+    <body>
+        <ul>
+        {% for product in object_list %}
+            <li>{{ product.name }}</li>
+            <li>{{ product.vendor }}</li>
+        {% endfor %}
+        
+        </ul>
+    </body>
+</html>

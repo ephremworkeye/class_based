@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic.edit import FormView, CreateView, UpdateView
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import FormView, CreateView,\
+     UpdateView, DeleteView
 from django.views import View
 from .forms import ProductForm
 from .models import Product
@@ -36,5 +38,21 @@ class ProductUpdateView(UpdateView):
     success_url = '/entry_success'
 
 
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = "product_delete_form.html"
+    success_url = '/delete_success'
 
+class ProductListView(ListView):
+    model = Product
+    # queryset = Product.objects.all()
+    template_name = 'product_list.html'
+
+    def get_queryset(self):
+        return Product.objects.all()[:1]
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "product_detail.html"
 
